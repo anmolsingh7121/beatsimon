@@ -5,6 +5,10 @@ var started = false;
 var score = 0;
 var clickCount;
 var isUserTurn = false;
+var highScore = Number(localStorage.getItem('High-Score')) || 0;
+
+$('#high-score').text("High Score: " + highScore);
+
 
 $(document).keydown(function(){
   if(!started){
@@ -58,6 +62,7 @@ function nextSequence(){
 
 function startOver(){
   $('#level-title').text("Game-over")
+  highScoreCheck(); 
       playSound("Game-over")
       $("body").addClass("flash")
       setTimeout(() => {
@@ -100,6 +105,14 @@ function animatePress(currentColor){
 function playSound(name){
   var audio = new Audio("sounds/" + name + ".mp3");
   audio.play();
+}
+
+function highScoreCheck(){
+  if(score > highScore){
+    highScore = score;
+    localStorage.setItem('High-Score', highScore)
+
+  }
 }
 
 function levelIncrement(){

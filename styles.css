@@ -59,3 +59,13 @@ body {
 .flash{
   background-color: red;
 }
+
+#high-score {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.5rem;
+  color: #FEF2BF;
+
+  position: absolute;
+  top: 120px;   /* 👈 push it below title */
+  right: 20px;
+}
