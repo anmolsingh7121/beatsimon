@@ -4,6 +4,7 @@ var buttonColors = ["red", "blue", "green", "yellow"];
 var started = false;
 var score = 0;
 var clickCount;
+var isUserTurn = false;
 
 $(document).keydown(function(){
   if(!started){
@@ -15,7 +16,7 @@ $(document).keydown(function(){
 });
 
 $(".btn").click(function(){
-  if(!started){
+  if(!started || !isUserTurn){
     return;   // do nothing if game hasn't started
   }
   var userChosenColor = this.id; // this here is the exact actual element that was clicked 
@@ -70,12 +71,21 @@ function startOver(){
 }
 
 function showSequence(){
+  isUserTurn = false;
   for(let i = 0; i < gamePattern.length; i++){
     setTimeout(function(){
       var color = gamePattern[i];
       $("." + color).fadeOut(100).fadeIn(100);
       playSound(color);
+
+      if(i === gamePattern.length-1){
+      setTimeout(() => {
+        isUserTurn = true;
+      }, 300);
+    }
     }, i * 600);
+
+    
   }
 }
 
